@@ -1,23 +1,41 @@
+"use client";
+
 import { DashboardShell } from '@/components/dashboard-shell';
 import { expenseBuckets } from '@/lib/mock-data';
+import { useState } from 'react';
 
 export default function FinancePage() {
+  const [yearly, setYearly] = useState(false);
+  const [syncState, setSyncState] = useState('Finance synced');
+
+  const income = yearly ? '₹14,80,000' : '₹1,20,000';
+  const expense = yearly ? '₹8,56,800' : '₹71,400';
+
   return (
-    <DashboardShell title="Finance Dashboard" currentPage="/finance">
+    <DashboardShell
+      title="Finance Dashboard"
+      currentPage="/finance"
+      syncState={syncState}
+      onSyncAll={() => setSyncState('Finance synced')}
+      onNewAction={() => setSyncState('Forecast updated')}
+    >
       <section className="stacked-grid two-col">
         <div className="panel">
           <div className="panel-header">
             <h2>Cash overview</h2>
-            <button className="ghost-button small">Forecast</button>
+            <button className="ghost-button small" onClick={() => {
+              setYearly((value) => !value);
+              setSyncState(yearly ? 'Monthly view active' : 'Yearly view active');
+            }}>Forecast</button>
           </div>
           <div className="finance-summary big">
             <div>
               <span>Income</span>
-              <strong>₹1,20,000</strong>
+              <strong>{income}</strong>
             </div>
             <div>
               <span>Expenses</span>
-              <strong>₹71,400</strong>
+              <strong>{expense}</strong>
             </div>
           </div>
         </div>

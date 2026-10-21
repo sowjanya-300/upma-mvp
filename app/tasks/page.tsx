@@ -1,17 +1,44 @@
+"use client";
+
 import { DashboardShell } from '@/components/dashboard-shell';
 import { projectTasks } from '@/lib/mock-data';
+import { useState } from 'react';
 
 export default function TasksPage() {
+  const [tasks, setTasks] = useState(projectTasks);
+  const [syncState, setSyncState] = useState('Tasks synced');
+
+  const handleAddProject = () => {
+    setTasks((current) => [
+      ...current,
+      {
+        name: 'New AI Experiment',
+        status: 'In Progress',
+        completion: 18,
+        owner: 'Product',
+        due: '06 Oct',
+        category: 'Side Hustle',
+      },
+    ]);
+    setSyncState('New project added');
+  };
+
   return (
-    <DashboardShell title="Project & Task Tracker" currentPage="/tasks">
+    <DashboardShell
+      title="Project & Task Tracker"
+      currentPage="/tasks"
+      syncState={syncState}
+      onSyncAll={() => setSyncState('Task board synced')}
+      onNewAction={handleAddProject}
+    >
       <section className="panel">
         <div className="panel-header">
           <h2>Active plans</h2>
-          <button className="ghost-button small">+ Add project</button>
+          <button className="ghost-button small" onClick={handleAddProject}>+ Add project</button>
         </div>
         <div className="task-table">
-          {projectTasks.map((task) => (
-            <div key={task.name} className="task-row">
+          {tasks.map((task) => (
+            <div key={`${task.name}-${task.due}`} className="task-row">
               <div>
                 <strong>{task.name}</strong>
                 <small>{task.owner} · {task.category}</small>

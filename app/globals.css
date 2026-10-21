@@ -2,30 +2,26 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  font-family: Inter, 'Segoe UI', Arial, sans-serif;
-  background: #07111f;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0b1020;
   color: #edf2ff;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-button, input, select, textarea {
-  font: inherit;
-}
+* { box-sizing: border-box; }
 
 button {
+  font: inherit;
   cursor: pointer;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+button.danger {
+  border-color: rgba(248, 113, 113, 0.5);
+  color: #fecaca;
 }
 
-body {
-  min-height: 100vh;
+button.saved-button {
+  margin-top: 10px;
+  width: fit-content;
 }
 
 .app-shell {
@@ -33,8 +29,8 @@ body {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
   background:
-    radial-gradient(circle at top left, rgba(139, 92, 246, 0.15), transparent 18%),
-    radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.14), transparent 18%),
+    radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.12), transparent 20%),
     #07111f;
 }
 
@@ -112,15 +108,6 @@ body {
   gap: 8px;
 }
 
-.sidebar-card strong {
-  font-size: 1.05rem;
-}
-
-.sidebar-card span {
-  color: #cbd5e1;
-  line-height: 1.5;
-}
-
 .main-panel {
   padding: 28px;
 }
@@ -139,14 +126,13 @@ body {
 }
 
 .header-actions,
-.topbar-actions,
 .mail-actions,
 .detail-actions,
 .tag-row,
-.bucket-label-row,
-.finance-summary,
 .panel-header,
+.bucket-label-row,
 .bucket-row,
+.finance-summary,
 .topbar {
   display: flex;
   align-items: center;
@@ -194,7 +180,7 @@ body {
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  gap: 6px; 
+  gap: 6px;
 }
 
 .stat-card span,
@@ -282,8 +268,7 @@ body {
 
 .tag,
 .tiny-tag,
-.status-pill,
-.badge {
+.status-pill {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
@@ -295,11 +280,6 @@ body {
 .tiny-tag {
   background: rgba(59, 130, 246, 0.12);
   color: #93c5fd;
-}
-
-.badge {
-  background: rgba(16, 185, 129, 0.12);
-  color: #6ee7b7;
 }
 
 .priority {
@@ -344,11 +324,6 @@ body {
 
 .task-row:last-child {
   border-bottom: none;
-}
-
-.task-row strong,
-.task-row small {
-  display: block;
 }
 
 .status-pill {
@@ -474,6 +449,8 @@ body {
 .notification.warning { border-left: 4px solid #fbbf24; }
 .notification.critical { border-left: 4px solid #f87171; }
 .notification.info { border-left: 4px solid #60a5fa; }
+.notification.read { opacity: 0.7; }
+.notification.unread { box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.4); }
 
 @media (max-width: 1100px) {
   .app-shell {

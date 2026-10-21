@@ -1,11 +1,21 @@
 import { DashboardShell } from '@/components/dashboard-shell';
 import { appStats, expenseBuckets, mailSummaries, newsStories, notifications, projectTasks } from '@/lib/mock-data';
+import { useState } from 'react';
 
 export default function HomePage() {
-  const featuredMail = mailSummaries[0];
+  const [featuredMailId, setFeaturedMailId] = useState<number>(mailSummaries[0].id);
+  const [syncState, setSyncState] = useState('All systems online');
+
+  const featuredMail = mailSummaries.find((mail) => mail.id === featuredMailId) ?? mailSummaries[0];
 
   return (
-    <DashboardShell title="Command Center" currentPage="/">
+    <DashboardShell
+      title="Command Center"
+      currentPage="/"
+      syncState={syncState}
+      onSyncAll={() => setSyncState('Sync complete · 2 minutes ago')}
+      onNewAction={() => setSyncState('New item created · Task queued')}
+    >
       <section className="stats-row">
         {appStats.map((stat) => (
           <div key={stat.label} className="stat-card">
@@ -20,11 +30,11 @@ export default function HomePage() {
         <div className="panel">
           <div className="panel-header">
             <h2>AI Mail Triage</h2>
-            <button className="ghost-button small">Archive all</button>
+            <button className="ghost-button small" onClick={() => setSyncState('Inbox archived · 1 action cleared')}>Archive all</button>
           </div>
           <div className="mail-list">
             {mailSummaries.map((mail) => (
-              <article key={mail.id} className={`mail-card ${mail.id === featuredMail.id ? 'active' : ''}`}>
+              <article key={mail.id} className={`mail-card ${mail.id === featuredMail.id ? 'active' : ''}`} onClick={() => setFeaturedMailId(mail.id)}>
                 <div className="mail-topline">
                   <div>
                     <strong>{mail.senderName}</strong>
@@ -65,7 +75,7 @@ export default function HomePage() {
         <div className="panel">
           <div className="panel-header">
             <h2>Project & Task Tracker</h2>
-            <button className="ghost-button small">+ Add project</button>
+            <button className="ghost-button small" onClick={() => setSyncState('Task planner refreshed')}>+ Add project</button>
           </div>
           <div className="task-table">
             {projectTasks.map((task) => (
@@ -90,7 +100,7 @@ export default function HomePage() {
         <div className="panel">
           <div className="panel-header">
             <h2>Finance Snapshot</h2>
-            <button className="ghost-button small">Forecast</button>
+            <button className="ghost-button small" onClick={() => setSyncState('Forecast recalculated')}>Forecast</button>
           </div>
           <div className="finance-summary big">
             <div>
@@ -120,7 +130,7 @@ export default function HomePage() {
         <div className="panel">
           <div className="panel-header">
             <h2>News Digest</h2>
-            <button className="ghost-button small">Saved for later</button>
+            <button className="ghost-button small" onClick={() => setSyncState('News curated for you')}>Saved for later</button>
           </div>
           <div className="news-grid compact-grid">
             {newsStories.map((story) => (
@@ -139,7 +149,7 @@ export default function HomePage() {
         <div className="panel">
           <div className="panel-header">
             <h2>Alert Center</h2>
-            <button className="ghost-button small">Mark all read</button>
+            <button className="ghost-button small" onClick={() => setSyncState('Notifications marked read')}>Mark all read</button>
           </div>
           <div className="notification-list">
             {notifications.map((item) => (

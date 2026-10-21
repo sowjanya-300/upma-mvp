@@ -1,3 +1,7 @@
+"use client";
+
+import { useMemo, useState } from 'react';
+
 export type MailUrgency = 'High' | 'Medium' | 'Low';
 
 export type MailSummary = {
@@ -77,14 +81,26 @@ export const expenseBuckets = [
 ];
 
 export const newsStories = [
-  { title: 'AI and the Future of Knowledge Work', category: 'Technology', region: 'Global', readTime: '4 min read' },
-  { title: 'Tamil Nadu Growth Outlook', category: 'Business', region: 'Local', readTime: '6 min read' },
-  { title: 'EU energy market shift', category: 'Economy', region: 'International', readTime: '5 min read' },
-  { title: 'Weekend wellness reset', category: 'Lifestyle', region: 'Local', readTime: '3 min read' },
+  { title: 'AI and the Future of Knowledge Work', category: 'Technology', region: 'Global', readTime: '4 min read', saved: false },
+  { title: 'Tamil Nadu Growth Outlook', category: 'Business', region: 'Local', readTime: '6 min read', saved: true },
+  { title: 'EU energy market shift', category: 'Economy', region: 'International', readTime: '5 min read', saved: false },
+  { title: 'Weekend wellness reset', category: 'Lifestyle', region: 'Local', readTime: '3 min read', saved: false },
 ];
 
 export const notifications = [
-  { id: 1, title: 'Budget threshold crossed', detail: 'Dining overspend is 12% above plan.', severity: 'warning' },
-  { id: 2, title: 'Task due today', detail: 'Q4 launch plan requires final approval.', severity: 'critical' },
-  { id: 3, title: 'Email triaged', detail: 'Three new messages delegated to tasks.', severity: 'info' },
+  { id: 1, title: 'Budget threshold crossed', detail: 'Dining overspend is 12% above plan.', severity: 'warning', read: false },
+  { id: 2, title: 'Task due today', detail: 'Q4 launch plan requires final approval.', severity: 'critical', read: false },
+  { id: 3, title: 'Email triaged', detail: 'Three new messages delegated to tasks.', severity: 'info', read: true },
 ];
+
+export function useDashboardState() {
+  const [syncState, setSyncState] = useState('All systems online');
+  const [selectedMailId, setSelectedMailId] = useState<number>(mailSummaries[0].id);
+
+  const selectedMail = useMemo(
+    () => mailSummaries.find((mail) => mail.id === selectedMailId) ?? mailSummaries[0],
+    [selectedMailId],
+  );
+
+  return { syncState, setSyncState, selectedMailId, setSelectedMailId, selectedMail };
+}

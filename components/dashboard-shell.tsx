@@ -17,10 +17,16 @@ export function DashboardShell({
   title,
   currentPage,
   children,
+  onSyncAll,
+  onNewAction,
+  syncState,
 }: {
   title: string;
   currentPage: string;
   children: ReactNode;
+  onSyncAll?: () => void;
+  onNewAction?: () => void;
+  syncState?: string;
 }) {
   const pathname = usePathname();
   const activePage = currentPage || pathname;
@@ -50,7 +56,7 @@ export function DashboardShell({
 
         <div className="sidebar-card">
           <p className="mini-label">Sync</p>
-          <strong>All systems online</strong>
+          <strong>{syncState ?? 'All systems online'}</strong>
           <span>Mail, tasks, finance, and news are synchronized.</span>
         </div>
       </aside>
@@ -62,8 +68,8 @@ export function DashboardShell({
             <h1>{title}</h1>
           </div>
           <div className="header-actions">
-            <button className="ghost-button">Sync all</button>
-            <button className="primary-button">+ New</button>
+            <button className="ghost-button" onClick={onSyncAll}>Sync all</button>
+            <button className="primary-button" onClick={onNewAction}>+ New</button>
           </div>
         </header>
 
