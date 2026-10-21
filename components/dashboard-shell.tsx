@@ -15,8 +15,8 @@ const navItems = [
 
 export function DashboardShell({
   title,
-  children,
   currentPage,
+  children,
 }: {
   title: string;
   currentPage: string;
@@ -36,7 +36,7 @@ export function DashboardShell({
           </div>
         </div>
 
-        <nav className="nav-stack">
+        <nav className="nav-stack" aria-label="Main Navigation">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -66,6 +66,7 @@ export function DashboardShell({
             <button className="primary-button">+ New</button>
           </div>
         </header>
+
         {children}
       </main>
     </div>

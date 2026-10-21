@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'UPMA',
+  title: 'UPMA | Command Center',
   description: 'Unified Productivity & Monitoring Agent',
   manifest: '/manifest.webmanifest',
   themeColor: '#7c3aed',
