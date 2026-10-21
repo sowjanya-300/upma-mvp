@@ -1,67 +1,40 @@
-# UPMA – Unified Productivity & Monitoring Agent
+# UPMA Feature Guide
 
-UPMA is a cross-platform productivity cockpit designed to unify mail, planning, finances, notifications, and personalized news. This repository contains a working MVP built with Next.js and a PWA-first frontend pattern, plus a ready-to-extend schema for Supabase/PostgreSQL.
+## 1. Aggregated mail integration and AI triage
 
-## Features included
+- Connect multiple mail providers through OAuth and provider adapters.
+- Poll mail at a configurable interval using webhooks or background jobs.
+- Generate a compact executive summary card for each message.
+- Allow assignment to tasks, archive, or delete based on triage status.
 
-- AI-powered mail triage cards with summary + action items
-- Email expansion workflow to view full original content
-- Project and task tracker with status, progress, and due dates
-- Unified finance dashboard with income, expense buckets, and forecast-ready structure
-- News tile module with regional and category filtering styles
-- Notification center for alerts and warnings
-- Light/dark theme toggle
-- PWA manifest metadata for installability
-- Database schema prepared for Supabase/PostgreSQL integration
+## 2. Unified project and task planner
 
-## Tech stack
+- Group tasks under projects.
+- Track planned vs actual dates, progress, and hours worked.
+- Automatically flag overdue tasks when the due date has passed and the status is incomplete.
+- Aggregate project-level completion percentages using weighted subtasks.
 
-- Next.js 14
-- React 18
-- TypeScript
-- CSS modules + custom dashboard styling
-- PWA manifest metadata
-- Supabase/PostgreSQL-ready schema
+## 3. Financial management and investor planning
 
-## Quick start
+- Aggregate balances and transactions from banking APIs or manual inputs.
+- Track household income and expense categories over time.
+- Support budget planning with historical and forecast views.
+- Build savings and investment simulations for retirement and goal-based planning.
 
-```bash
-npm install
-npm run dev
-```
+## 4. News and magazine dashboard
 
-Open http://localhost:3000
+- Manage regional and category filters for local, national, and global headlines.
+- Offer save-for-later and focus-mode interactions for premium readability.
+- Structure future magazine viewing as a dedicated, browsable digital shelf.
 
-## Production build
+## 5. Notifications and alerts
 
-```bash
-npm run build
-npm run start
-```
+- Centralize external notifications into a single triage system.
+- Reuse the same decision engine as mail triage: assign, archive, or delete.
+- Route high-priority actions into push notifications and desktop alerts.
 
-## Supabase-ready schema
+## 6. Design system
 
-See `docs/schema.sql` for the initial relational model covering:
-
-- users
-- connected_accounts
-- mail_items
-- mail_tags
-- projects
-- tasks
-- budgets
-- transactions
-- savings_goals
-- news_items
-- notifications
-
-## MVP roadmap
-
-This implementation intentionally keeps the first version functional and realistic while avoiding heavy external API dependencies. It is structured so that real OAuth, email connectors, banking APIs, or market data sources can be plugged in later.
-
-## Architecture notes
-
-- Frontend: Next.js dashboard with a modular UI architecture
-- Data layer: Supabase/PostgreSQL-ready SQL schema
-- Integrations: provider adapters to be added with mock-first / real-ready design
-- Security: environment variables and token storage intended to be handled via secure backend configuration
+- Maintain a clean dashboard layout with dark and light modes.
+- Use fluid cards, responsive spacing, and consistent UI patterns across modules.
+- Keep the interface installable as a PWA with cross-device support.

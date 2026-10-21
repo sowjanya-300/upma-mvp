@@ -76,10 +76,10 @@ const expenseBuckets = [
 ];
 
 const newsStories = [
-  { title: 'AI and the Future of Knowledge Work', category: 'Technology', region: 'Global', image: 'https://images.unsplash.com/...', readTime: '4 min read' },
-  { title: 'Tamil Nadu Growth Outlook', category: 'Business', region: 'Local', image: 'https://images.unsplash.com/...', readTime: '6 min read' },
-  { title: 'EU energy market shift', category: 'Economy', region: 'International', image: 'https://images.unsplash.com/...', readTime: '5 min read' },
-  { title: 'Weekend wellness reset', category: 'Lifestyle', region: 'Local', image: 'https://images.unsplash.com/...', readTime: '3 min read' },
+  { title: 'AI and the Future of Knowledge Work', category: 'Technology', region: 'Global', readTime: '4 min read' },
+  { title: 'Tamil Nadu Growth Outlook', category: 'Business', region: 'Local', readTime: '6 min read' },
+  { title: 'EU energy market shift', category: 'Economy', region: 'International', readTime: '5 min read' },
+  { title: 'Weekend wellness reset', category: 'Lifestyle', region: 'Local', readTime: '3 min read' },
 ];
 
 const notifications = [
@@ -109,7 +109,7 @@ export default function UpmaDashboard() {
             <button className="ghost-button">Sync all</button>
             <button className="primary-button">Create task</button>
             <button className="icon-button" onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}>
-              {theme === 'dark' ? '☀️' : '🌙'}
+              {theme === 'dark' ? '☀���' : '🌙'}
             </button>
           </div>
         </header>

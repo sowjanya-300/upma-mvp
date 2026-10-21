@@ -1,40 +1,45 @@
-# UPMA Feature Guide
+# UPMA Architecture Overview
 
-## 1. Aggregated mail integration and AI triage
+## Core design principles
 
-- Connect multiple mail providers through OAuth and provider adapters.
-- Poll mail at a configurable interval using webhooks or background jobs.
-- Generate a compact executive summary card for each message.
-- Allow assignment to tasks, archive, or delete based on triage status.
+- Cross-platform, responsive, PWA-first experience
+- Real-ready connectors with mock-first fallback data
+- Central notification and triage engine reused across modules
+- Local-first MVP with cloud-ready Supabase/PostgreSQL schema as the next layer
 
-## 2. Unified project and task planner
+## Module boundaries
 
-- Group tasks under projects.
-- Track planned vs actual dates, progress, and hours worked.
-- Automatically flag overdue tasks when the due date has passed and the status is incomplete.
-- Aggregate project-level completion percentages using weighted subtasks.
+### Mail triage
+- Remote account connectors
+- Summary card generation
+- Triage decisions and actions
 
-## 3. Financial management and investor planning
+### Project & task engine
+- Relational project/task model
+- Progress and overdue tracking
+- Category and owner metadata
 
-- Aggregate balances and transactions from banking APIs or manual inputs.
-- Track household income and expense categories over time.
-- Support budget planning with historical and forecast views.
-- Build savings and investment simulations for retirement and goal-based planning.
+### Finance layer
+- Manual and API-driven transaction ingestion
+- Budget buckets and projections
+- Savings scheme and goal modeling
 
-## 4. News and magazine dashboard
+### News & magazine
+- Curated news feeds and local/global categories
+- Save-for-later and read later experiences
+- Future magazine shelf and focus mode
 
-- Manage regional and category filters for local, national, and global headlines.
-- Offer save-for-later and focus-mode interactions for premium readability.
-- Structure future magazine viewing as a dedicated, browsable digital shelf.
+### Notification center
+- Event ingestion from mail, tasks, and external services
+- Standardized severity handling
+- Push infrastructure hook for future deployment
 
-## 5. Notifications and alerts
+## Deployment readiness
 
-- Centralize external notifications into a single triage system.
-- Reuse the same decision engine as mail triage: assign, archive, or delete.
-- Route high-priority actions into push notifications and desktop alerts.
+This repository provides the MVP dashboard and architecture foundation. A production-ready deployment would add:
 
-## 6. Design system
-
-- Maintain a clean dashboard layout with dark and light modes.
-- Use fluid cards, responsive spacing, and consistent UI patterns across modules.
-- Keep the interface installable as a PWA with cross-device support.
+- secure environment variables
+- authentication and authorization
+- provider adapters for mail and finance
+- scheduled sync workers
+- push notification gateway and data pipeline
